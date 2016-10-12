@@ -1,8 +1,8 @@
 [PrintJobConfig]
 job_num = 10
-user_num = 1
+user_num = 10
 print_format = text
-print_path = C:/Users/Yang Tao/Desktop/Test.txt
+print_path = C:/Python Projects/Test.txt
 
 [Server Info]
 ip = 192.168.12.159

@@ -1,21 +1,55 @@
  #! /usr/bin/python
 
 import os
-
+import time
+import threading
 from configparser import ConfigParser
+
+
+class myThread (threading.Thread):
+    def __init__(self, threadID, name, jobnum, path, usernum ):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.jobnum = jobnum
+        self.usernum = usernum
+        self.path = path
+    def run(self):
+        print ("Starting " + self.name)
+        Print_Per_User(self.jobnum,self.path,self.usernum)
+        print ("Exiting " + self.name)
+
+#Define a function which can print Jobnum's print job
+def Print_Per_User(jobnum, path, usernum):
+    for i in range(0,jobnum):
+    # For testing use print only
+      localtime = time.asctime(time.localtime(time.time()))
+      print( localtime," -----User={}, Job number= {}".format(usernum,jobnum) )
+    #accutal testing print the job
+      #os.startfile(PrintPath, "print")
+
+def Print_User(jobnum, path, usernum):
+    for i in range (0,usernum):
+        try:
+            #Print_Per_User(jobnum,path,usernum)  #("Thread" + str(i), i,))
+            thread1 = myThread(i+1, "Thread"+str(i+1), jobnum, path, i+1)
+           # print("Start Thread {}".format(i+1))
+            thread1.start()
+        except:
+            print ("Error: unable to start thread")
+
 
 if __name__ == "__main__":
     cfg = ConfigParser()
 
     cfg.read('config1.txt')
     PrintPath = cfg.get('PrintJobConfig', 'print_path')
-    JobNum = int(cfg.get('Test_Setting', 'job_num'))
+    JobNum = int(cfg.get('PrintJobConfig', 'job_num'))
+    UserNum = int(cfg.get('PrintJobConfig', 'user_num'))
     i=0
+    Print_User(JobNum,PrintPath,UserNum)
 
-    # Basic print job
 
-    for i in range(0,JobNum):
-     os.startfile(PrintPath, "print")
 
 
 
