@@ -1,0 +1,17 @@
+[PrintJobConfig]
+job_num = 10
+user_num = 1
+print_format = text
+print_path = C:/Users/Yang Tao/Desktop/Test.txt
+
+[Server Info]
+ip = 192.168.12.159
+domain = Jetmobiledemo\jetmobile
+gateway = 255.255.255.125
+connection = True
+
+[Test_Setting]
+job_num = 2
+user_num = 10
+username = Jetmobiledemo\jetmobile
+
